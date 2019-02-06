@@ -2,6 +2,8 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/apartment'
 require './lib/building'
+require './lib/renter'
+
 
 class BuildingTest < Minitest::Test
 
@@ -32,5 +34,16 @@ class BuildingTest < Minitest::Test
     @building.add_unit(@a1)
     @building.add_unit(@b2)
     assert_equal 1099, @building.average_rent
+  end
+
+  def test_renter_with_highest_rent_method
+    jessie = Renter.new("Jessie")
+    spencer = Renter.new("Spencer")
+    @b2.add_renter(spencer)
+    @building.add_unit(@a1)
+    @building.add_unit(@b2)
+    assert_equal spencer, @building.renter_with_highest_rent
+    @a1.add_renter(jessie)
+    assert_equal jessie, @building.renter_with_highest_rent
   end
 end

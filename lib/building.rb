@@ -13,4 +13,10 @@ class Building
     @units.each {|unit| sum += unit.info[:monthly_rent]}
     sum / @units.length
   end
+
+  def renter_with_highest_rent
+    units_w_renters = @units.select {|unit| unit.renter}
+    max_rent = units_w_renters.max_by{|unit| unit.info[:monthly_rent]}
+    max_rent.renter
+  end
 end
