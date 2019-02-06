@@ -19,4 +19,13 @@ class Building
     max_rent = units_w_renters.max_by{|unit| unit.info[:monthly_rent]}
     max_rent.renter
   end
+
+  def annual_breakdown
+    breakdown = {}
+    units_w_renters = @units.select {|unit| unit.renter}
+    units_w_renters.each do |unit|
+      breakdown[unit.renter.name] = unit.info[:monthly_rent] *12
+    end
+    breakdown
+  end
 end
